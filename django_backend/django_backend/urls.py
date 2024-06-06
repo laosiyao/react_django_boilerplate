@@ -21,6 +21,14 @@ from django.conf.urls.static import static
 from django.views.static import serve
 from django.conf.urls.static import static
 
+from django.contrib import admin
+from django.urls import path
+from apps.api.views import LoginView, CaptchaView, RoleSearchView, EmailSenderView  # 修改导入路径
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('api/login/', LoginView.as_view(), name='login'),
+    path('api/captcha/', CaptchaView.as_view(), name='captcha'),
+    path('api/roles/', RoleSearchView.as_view(), name='role_search'),
+    path('api/send-email/', EmailSenderView.as_view(), name='send_email'),
+]
